@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sweet House - Online Order</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+
+    background:
+    linear-gradient(
+        rgba(255,248,240,.92),
+        rgba(255,248,240,.92)
+    ),
+    url("https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80");
+
+    background-size:cover;
+    background-attachment:fixed;
+
+    color:#3b2115;
+}
+
+.header{
+    text-align:center;
+    padding:35px 15px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #6b1d1d,
+        #a83232
+    );
+
+    color:white;
+}
+
+.header h1{
+    font-size:38px;
+    margin-bottom:8px;
+}
+
+.header p{
+    font-size:17px;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:20px;
+}
+
+.card{
+    background:rgba(255,255,255,.97);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.15);
+}
+
+.card h2{
+    color:#8b2424;
+
+    margin-bottom:18px;
+
+    border-bottom:2px solid #e6b45c;
+
+    padding-bottom:10px;
+}
+
+label{
+    display:block;
+
+    font-weight:bold;
+
+    margin:13px 0 6px;
+}
+
+input,
+select{
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+
+    outline:none;
+
+    border-color:#8b2424;
+}
+
+
+/* SWEETS */
+
+.sweet-box{
+
+    border:2px solid #ead3a0;
+
+    padding:20px;
+
+    border-radius:14px;
+
+    background:#fffaf0;
+
+    margin-bottom:20px;
+}
+
+.sweet-box h3{
+
+    color:#8b2424;
+
+    margin-bottom:8px;
+}
+
+.price{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+}
+
+.sweet-item{
+
+    background:white;
+
+    border:1px solid #ddd;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    margin:12px 0;
+}
+
+.sweet-name{
+
+    font-weight:bold;
+
+    font-size:17px;
+}
+
+.quantity{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:10px;
+}
+
+.quantity button{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#8b2424;
+
+    color:white;
+
+    font-size:23px;
+
+    cursor:pointer;
+}
+
+.quantity button:hover{
+
+    background:#641818;
+}
+
+.quantity input{
+
+    text-align:center;
+
+    font-weight:bold;
+
+    width:80px;
+}
+
+
+/* TOTAL */
+
+.total-box{
+
+    text-align:center;
+
+    background:#fff3d4;
+
+    border:2px solid #e6b45c;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-top:20px;
+}
+
+.total-box h2{
+
+    border:none;
+
+    margin-bottom:10px;
+}
+
+.total{
+
+    font-size:32px;
+
+    color:#16833b;
+
+    font-weight:bold;
+
+    margin-top:10px;
+}
+
+.delivery-charge{
+
+    color:#8b2424;
+
+    font-weight:bold;
+
+    margin-top:10px;
+}
+
+
+/* PAYMENT */
+
+.payment-option{
+
+    display:block;
+
+    border:2px solid #ddd;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin:10px 0;
+
+    cursor:pointer;
+}
+
+.payment-option:hover{
+
+    border-color:#8b2424;
+}
+
+.payment-option input{
+
+    width:auto;
+
+    margin-right:8px;
+}
+
+.easypaisa{
+
+    display:none;
+
+    background:#eefaf0;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-top:10px;
+
+    border:1px solid #9ed2a8;
+}
+
+
+/* BUTTON */
+
+.submit{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #8b2424,
+        #bd4b4b
+    );
+
+    color:white;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.submit:hover{
+
+    opacity:.9;
+}
+
+
+/* FOOTER */
+
+.footer{
+
+    text-align:center;
+
+    padding:25px;
+
+    background:#3b2115;
+
+    color:white;
+}
+
+
+@media(max-width:650px){
+
+    .header h1{
+
+        font-size:30px;
+    }
+
+    .container{
+
+        padding:10px;
+    }
+
+    .card{
+
+        padding:18px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <h1>🍬 Sweet House 🍬</h1>
+
+    <p>
+        Fresh & Delicious Sweets — Order Online
+    </p>
+
+</header>
+
+
+
+<div class="container">
+
+
+<form id="orderForm">
+
+
+<!-- CUSTOMER INFORMATION -->
+
+<div class="card">
+
+<h2>Customer Information</h2>
+
+
+<label>Full Name</label>
+
+<input
+    id="name"
+    type="text"
+    placeholder="Enter your full name"
+    required
+>
+
+
+<label>Father's Name</label>
+
+<input
+    id="fatherName"
+    type="text"
+    placeholder="Enter father's name"
+    required
+>
+
+
+<label>Phone Number</label>
+
+<input
+    id="phone"
+    type="tel"
+    placeholder="03XXXXXXXXX"
+    required
+>
+
+
+<label>WhatsApp Number</label>
+
+<input
+    id="whatsapp"
+    type="tel"
+    placeholder="03XXXXXXXXX"
+>
+
+
+</div>
+
+
+
+<!-- DELIVERY ADDRESS -->
+
+<div class="card">
+
+<h2>Delivery Address</h2>
+
+
+<label>Permanent Address</label>
+
+<input
+    id="address"
+    type="text"
+    placeholder="Enter your permanent address"
+    required
+>
+
+
+<label>House Number</label>
+
+<input
+    id="house"
+    type="text"
+    placeholder="Enter house number"
+    required
+>
+
+
+<!-- ONLY SINDH -->
+
+<label>Province</label>
+
+<select
+    id="province"
+    required
+>
+
+<option value="Sindh">
+Sindh
+</option>
+
+</select>
+
+
+
+<!-- SINDH CITIES -->
+
+<label>City</label>
+
+<select
+    id="city"
+    onchange="calculateTotal()"
+    required
+>
+
+<option value="">
+Select City
+</option>
+
+<option value="Karachi">
+Karachi
+</option>
+
+<option value="Hyderabad">
+Hyderabad
+</option>
+
+<option value="Tando Allahyar">
+Tando Allahyar
+</option>
+
+<option value="Tando Jam">
+Tando Jam
+</option>
+
+<option value="Mirpur Khas">
+Mirpur Khas
+</option>
+
+<option value="Sukkur">
+Sukkur
+</option>
+
+<option value="Larkana">
+Larkana
+</option>
+
+<option value="Nawabshah">
+Nawabshah
+</option>
+
+<option value="Jacobabad">
+Jacobabad
+</option>
+
+<option value="Shikarpur">
+Shikarpur
+</option>
+
+<option value="Khairpur">
+Khairpur
+</option>
+
+<option value="Thatta">
+Thatta
+</option>
+
+<option value="Badin">
+Badin
+</option>
+
+<option value="Dadu">
+Dadu
+</option>
+
+<option value="Matiari">
+Matiari
+</option>
+
+<option value="Umerkot">
+Umerkot
+</option>
+
+<option value="Sanghar">
+Sanghar
+</option>
+
+<option value="Ghotki">
+Ghotki
+</option>
+
+<option value="Kashmore">
+Kashmore
+</option>
+
+<option value="Qambar Shahdadkot">
+Qambar Shahdadkot
+</option>
+
+<option value="Tando Muhammad Khan">
+Tando Muhammad Khan
+</option>
+
+<option value="Sujawal">
+Sujawal
+</option>
+
+<option value="Jamshoro">
+Jamshoro
+</option>
+
+</select>
+
+
+</div>
+
+
+
+<!-- SPECIAL SWEETS -->
+
+<div class="card">
+
+<h2>
+⭐ Special Sweets
+</h2>
+
+
+<p class="price">
+
+All Special Sweets:
+Rs. 850 per KG
+
+</p>
+
+
+
+<!-- WHITE GULAB JAMUN -->
+
+<div class="sweet-item">
+
+<div class="sweet-name">
+
+🤍 White Gulab Jamun
+
+</div>
+
+
+<div class="quantity">
+
+<button
+    type="button"
+    onclick="changeSweet('whiteGulab',-1)"
+>
+−
+</button>
+
+
+<input
+    id="whiteGulabQty"
+    value="0"
+    readonly
+>
+
+
+<button
+    type="button"
+    onclick="changeSweet('whiteGulab',1)"
+>
++
+</button>
+
+
+<span>KG</span>
+
+</div>
+
+</div>
+
+
+
+<!-- BLACK GULAB JAMUN -->
+
+<div class="sweet-item">
+
+<div class="sweet-name">
+
+🖤 Black Gulab Jamun
+
+</div>
+
+
+<div class="quantity">
+
+<button
+    type="button"
+    onclick="changeSweet('blackGulab',-1)"
+>
+−
+</button>
+
+
+<input
+    id="blackGulabQty"
+    value="0"
+    readonly
+>
+
+
+<button
+    type="button"
+    onclick="changeSweet('blackGulab',1)"
+>
++
+</button>
+
+
+<span>KG</span>
+
+</div>
+
+</div>
+
+
+
+<!-- BROWN GULAB JAMUN -->
+
+<div class="sweet-item">
+
+<div class="sweet-name">
+
+🤎 Brown Gulab Jamun
+
+</div>
+
+
+<div class="quantity">
+
+<button
+    type="button"
+    onclick="changeSweet('brownGulab',-1)"
+>
+−
+</button>
+
+
+<input
+    id="brownGulabQty"
+    value="0"
+    readonly
+>
+
+
+<button
+    type="button"
+    onclick="changeSweet('brownGulab',1)"
+>
++
+</button>
+
+
+<span>KG</span>
+
+</div>
+
+</div>
+
+
+
+<!-- BARFI -->
+
+<div class="sweet-item">
+
+<div class="sweet-name">
+
+🍬 Barfi
+
+</div>
+
+
+<div class="quantity">
+
+<button
+    type="button"
+    onclick="changeSweet('barfi',-1)"
+>
+−
+</button>
+
+
+<input
+    id="barfiQty"
+    value="0"
+    readonly
+>
+
+
+<button
+    type="button"
+    onclick="changeSweet('barfi',1)"
+>
++
+</button>
+
+
+<span>KG</span>
+
+</div>
+
+</div>
+
+
+
+<!-- LADDU -->
+
+<div class="sweet-item">
+
+<div class="sweet-name">
+
+🟡 Laddu
+
+</div>
+
+
+<div class="quantity">
+
+<button
+    type="button"
+    onclick="changeSweet('laddu',-1)"
+>
+−
+</button>
+
+
+<input
+    id="ladduQty"
+    value="0"
+    readonly
+>
+
+
+<button
+    type="button"
+    onclick="changeSweet('laddu',1)"
+>
++
+</button>
+
+
+<span>KG</span>
+
+</div>
+
+</div>
+
+
+
+<!-- TOTAL -->
+
+<div class="total-box">
+
+<h2>
+Order Summary
+</h2>
+
+
+<p>
+
+Sweets Amount:
+Rs.
+
+<span id="sweetsTotal">
+0
+</span>
+
+</p>
+
+
+<p class="delivery-charge">
+
+Delivery Charges:
+Rs.
+
+<span id="deliveryCharge">
+0
+</span>
+
+</p>
+
+
+<hr>
+
+
+<p class="total">
+
+Grand Total:
+Rs.
+
+<span id="grandTotal">
+0
+</span>
+
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- PAYMENT -->
+
+<div class="card">
+
+<h2>
+Payment Method
+</h2>
+
+
+<label class="payment-option">
+
+<input
+    type="radio"
+    name="payment"
+    value="Cash on Delivery"
+    checked
+    onclick="paymentMethod()"
+>
+
+Cash on Delivery
+
+</label>
+
+
+
+<label class="payment-option">
+
+<input
+    type="radio"
+    name="payment"
+    value="Easypaisa"
+    onclick="paymentMethod()"
+>
+
+Easypaisa
+
+</label>
+
+
+
+<div
+    class="easypaisa"
+    id="easypaisaBox"
+>
+
+<h3>
+📱 Easypaisa Payment
+</h3>
+
+
+<p>
+Please send payment to:
+</p>
+
+
+<!-- YOUR EASYPAISA NUMBER -->
+
+<h2>
+03168203478
+</h2>
+
+
+<p>
+After payment, keep your transaction receipt.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- ORDER -->
+
+<div class="card">
+
+<button
+    class="submit"
+    type="submit"
+>
+
+📱 Place Order on WhatsApp
+
+</button>
+
+</div>
+
+
+</form>
+
+</div>
+
+
+
+<footer class="footer">
+
+<p>
+
+© 2026 Sweet House — Fresh & Delicious
+
+</p>
+
+</footer>
+
+
+
+<script>
+
+
+/* =================================
+   SWEET PRICE
+================================= */
+
+const sweetPrice = 850;
+
+
+
+/* =================================
+   SWEET QUANTITIES
+================================= */
+
+let quantities = {
+
+    whiteGulab: 0,
+
+    blackGulab: 0,
+
+    brownGulab: 0,
+
+    barfi: 0,
+
+    laddu: 0
+
+};
+
+
+
+/* =================================
+   DELIVERY CHARGES
+================================= */
+
+const deliveryCharges = {
+
+    "Tando Allahyar": 100,
+
+    "Tando Jam": 100,
+
+    "Mirpur Khas": 200,
+
+    "Hyderabad": 250,
+
+    "Karachi": 350
+
+};
+
+
+
+/* =================================
+   CHANGE SWEET QUANTITY
+================================= */
+
+function changeSweet(name,value){
+
+    quantities[name] += value;
+
+
+    if(quantities[name] < 0){
+
+        quantities[name] = 0;
+
+    }
+
+
+    if(quantities[name] > 100){
+
+        quantities[name] = 100;
+
+    }
+
+
+    document.getElementById(
+        name + "Qty"
+    ).value = quantities[name];
+
+
+    calculateTotal();
+
+}
+
+
+
+/* =================================
+   GET DELIVERY CHARGE
+================================= */
+
+function getDeliveryCharge(){
+
+    let city =
+        document.getElementById("city").value;
+
+
+    if(city === ""){
+
+        return 0;
+
+    }
+
+
+    if(
+        deliveryCharges.hasOwnProperty(city)
+    ){
+
+        return deliveryCharges[city];
+
+    }
+
+
+    /* ALL OTHER SINDH CITIES */
+
+    return 300;
+
+}
+
+
+
+/* =================================
+   CALCULATOR
+================================= */
+
+function calculateTotal(){
+
+
+    let totalKG =
+
+        quantities.whiteGulab +
+
+        quantities.blackGulab +
+
+        quantities.brownGulab +
+
+        quantities.barfi +
+
+        quantities.laddu;
+
+
+    let sweetsTotal =
+        totalKG * sweetPrice;
+
+
+    let deliveryCharge =
+        getDeliveryCharge();
+
+
+    let grandTotal =
+        sweetsTotal + deliveryCharge;
+
+
+
+    document.getElementById(
+        "sweetsTotal"
+    ).innerText =
+        sweetsTotal.toLocaleString();
+
+
+
+    document.getElementById(
+        "deliveryCharge"
+    ).innerText =
+        deliveryCharge.toLocaleString();
+
+
+
+    document.getElementById(
+        "grandTotal"
+    ).innerText =
+        grandTotal.toLocaleString();
+
+}
+
+
+
+/* =================================
+   PAYMENT
+================================= */
+
+function paymentMethod(){
+
+    let method =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        ).value;
+
+
+    document.getElementById(
+        "easypaisaBox"
+    ).style.display =
+
+        method === "Easypaisa"
+
+        ? "block"
+
+        : "none";
+
+}
+
+
+
+/* =================================
+   WHATSAPP ORDER
+================================= */
+
+document
+.getElementById("orderForm")
+.addEventListener(
+"submit",
+function(event){
+
+    event.preventDefault();
+
+
+
+    let totalKG =
+
+        quantities.whiteGulab +
+
+        quantities.blackGulab +
+
+        quantities.brownGulab +
+
+        quantities.barfi +
+
+        quantities.laddu;
+
+
+
+    if(totalKG === 0){
+
+        alert(
+            "Please select at least 1 KG of sweets."
+        );
+
+        return;
+
+    }
+
+
+
+    let city =
+        document.getElementById("city").value;
+
+
+
+    if(city === ""){
+
+        alert(
+            "Please select your city."
+        );
+
+        return;
+
+    }
+
+
+
+    /* YOUR WHATSAPP NUMBER */
+
+    const shopWhatsApp =
+        "923197583949";
+
+
+
+    let name =
+        document.getElementById(
+            "name"
+        ).value;
+
+
+
+    let fatherName =
+        document.getElementById(
+            "fatherName"
+        ).value;
+
+
+
+    let phone =
+        document.getElementById(
+            "phone"
+        ).value;
+
+
+
+    let whatsapp =
+        document.getElementById(
+            "whatsapp"
+        ).value;
+
+
+
+    let address =
+        document.getElementById(
+            "address"
+        ).value;
+
+
+
+    let house =
+        document.getElementById(
+            "house"
+        ).value;
+
+
+
+    let payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        ).value;
+
+
+
+    let sweetsTotal =
+
+        totalKG * sweetPrice;
+
+
+
+    let deliveryCharge =
+        getDeliveryCharge();
+
+
+
+    let grandTotal =
+
+        sweetsTotal +
+        deliveryCharge;
+
+
+
+    let message =
+
+`🍬 SWEET HOUSE - NEW ORDER 🍬
+
+👤 CUSTOMER INFORMATION
+
+Name: ${name}
+Father's Name: ${fatherName}
+Phone: ${phone}
+WhatsApp: ${whatsapp}
+
+📍 DELIVERY ADDRESS
+
+Permanent Address: ${address}
+House Number: ${house}
+City: ${city}
+Province: Sindh
+
+⭐ SPECIAL SWEETS
+
+White Gulab Jamun:
+${quantities.whiteGulab} KG
+
+Black Gulab Jamun:
+${quantities.blackGulab} KG
+
+Brown Gulab Jamun:
+${quantities.brownGulab} KG
+
+Barfi:
+${quantities.barfi} KG
+
+Laddu:
+${quantities.laddu} KG
+
+🍬 SWEETS AMOUNT
+
+Rs. ${sweetsTotal}
+
+🚚 DELIVERY CHARGES
+
+City: ${city}
+Delivery Charges: Rs. ${deliveryCharge}
+
+💰 GRAND TOTAL
+
+Rs. ${grandTotal}
+
+💳 PAYMENT METHOD
+
+${payment}
+
+Thank you for ordering from Sweet House!`;
+
+
+
+    let whatsappURL =
+
+        "https://wa.me/" +
+
+        shopWhatsApp +
+
+        "?text=" +
+
+        encodeURIComponent(message);
+
+
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+});
+
+</script>
+
+
+</body>
+</html>.html
